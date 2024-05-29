@@ -1,99 +1,20 @@
 # Credit-Card-Fraud-Detection
 
-## Overview
+## Overview of the Problem
 
-This is your new Kedro project with Kedro-Viz setup, which was generated using `kedro 0.19.6`.
+The addressed problem consists of analyzing and detecting possible fraudulent credit card transactions in order to assist customers in avoiding unauthorized charges for purchases they did not make. This is a highly relevant issue, especially due to the rise of virtual banks (such as PayPal, Nubank, and other), where there are many complaints and discussions about banking fraud on the internet, with little assistance provided by banks to their customers. This lack of support results in low trust and loss of public confidence.
 
-Take a look at the [Kedro documentation](https://docs.kedro.org) to get started.
+To tackle this problem, we employed Semi-Supervised Learning to study the issue and utilized One-Class Classification to find a way to detect these frauds before customers are charged for unauthorized purchases they did not make. These techniques are highly relevant as they can also leverage unlabeled data for prediction and classification tasks.
 
-## Rules and guidelines
+In the real world, it is notably easier to find unlabeled data, especially in specific contexts such as text analysis. Additionally, unlabeled data tends to be cheaper and easier to collect compared to labeled data. This phenomenon occurs because unlabeled data can be readily collected through automated scraping tools. This technique is known as *data scraping*. The ease of collecting unlabeled data is due to the fact that labeled examples mostly require human interaction, often involving experts to perform the labeling task.
 
-In order to get the best out of the template:
+To better explain the group's motivation in choosing the dataset, it is necessary to understand what will be analyzed. In this work, we chose to analyze *point anomalies*, which refer to individual data points that are considered abnormal in relation to other data points in the dataset. In the image below, for example, $O_1, O_2$, and $O_3$ are considered abnormal data points compared to the data points within the normal regions $N_1$ and $N_2$.
 
-* Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a [data engineering convention](https://docs.kedro.org/en/stable/faq/faq.html#what-is-data-engineering-convention)
-* Don't commit data to your repository
-* Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
+![image](https://github.com/julianafalves/Credit-Card-Fraud-Detection/assets/49698966/880ef261-8627-4c6c-b5ec-df8f0ac00a88)
 
-## How to install dependencies
 
-Declare any dependencies in `requirements.txt` for `pip` installation.
+Based on this information, we selected the dataset [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) to study and gain a better understanding of how machine learning algorithms can be used for anomaly detection. In this case, an anomaly occurs when there is a transaction from the same customer that deviates from the normal usage patterns of the credit card. For example, suppose a person X has an average monthly spending of 1000 reais on their credit card. If, by chance, they exceed this average by making a transaction significantly higher than their usual spending, the algorithm will detect and classify it as an anomaly.
 
-To install them, run:
+The dataset contains transactions that occurred over a span of two days, during which there were 492 frauds out of 284,807 transactions, accounting for 0.17% of all transactions within that time frame. To facilitate the analysis, the dataset only includes numerical data resulting from Principal Component Analysis (PCA) transformation. However, due to privacy and security concerns, no further information about the features V1, V2, V3, ..., V28 could be obtained, except that they represent the main components obtained after PCA. The only two pieces of information that were not transformed are 'Time', which represents the seconds elapsed between each transaction after the first transaction in the dataset, and 'Amount', which denotes the value of the transaction.
 
-```
-pip install -r requirements.txt
-```
-
-## How to run your Kedro pipeline
-
-You can run your Kedro project with:
-
-```
-kedro run
-```
-
-## How to test your Kedro project
-
-Have a look at the files `src/tests/test_run.py` and `src/tests/pipelines/data_science/test_pipeline.py` for instructions on how to write your tests. Run the tests as follows:
-
-```
-pytest
-```
-
-To configure the coverage threshold, look at the `.coveragerc` file.
-
-## Project dependencies
-
-To see and update the dependency requirements for your project use `requirements.txt`. Install the project requirements with `pip install -r requirements.txt`.
-
-[Further information about project dependencies](https://docs.kedro.org/en/stable/kedro_project_setup/dependencies.html#project-specific-dependencies)
-
-## How to work with Kedro and notebooks
-
-> Note: Using `kedro jupyter` or `kedro ipython` to run your notebook provides these variables in scope: `catalog`, `context`, `pipelines` and `session`.
->
-> Jupyter, JupyterLab, and IPython are already included in the project requirements by default, so once you have run `pip install -r requirements.txt` you will not need to take any extra steps before you use them.
-
-### Jupyter
-To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
-
-```
-pip install jupyter
-```
-
-After installing Jupyter, you can start a local notebook server:
-
-```
-kedro jupyter notebook
-```
-
-### JupyterLab
-To use JupyterLab, you need to install it:
-
-```
-pip install jupyterlab
-```
-
-You can also start JupyterLab:
-
-```
-kedro jupyter lab
-```
-
-### IPython
-And if you want to run an IPython session:
-
-```
-kedro ipython
-```
-
-### How to ignore notebook output cells in `git`
-To automatically strip out all output cell contents before committing to `git`, you can use tools like [`nbstripout`](https://github.com/kynan/nbstripout). For example, you can add a hook in `.git/config` with `nbstripout --install`. This will run `nbstripout` before anything is committed to `git`.
-
-> *Note:* Your output cells will be retained locally.
-
-[Further information about using notebooks for experiments within Kedro projects](https://docs.kedro.org/en/develop/notebooks_and_ipython/kedro_and_notebooks.html).
-## Package your Kedro project
-
-[Further information about building project documentation and packaging your project](https://docs.kedro.org/en/stable/tutorial/package_a_project.html).
+The class that distinguishes between normal and anomalous transactions is divided into 0 and 1, respectively.
