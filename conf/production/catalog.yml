@@ -1,0 +1,3 @@
+creditCard:
+  type: pandas.CSVDataset
+  filepath: s3://fraud-detection/creditcard.csv
