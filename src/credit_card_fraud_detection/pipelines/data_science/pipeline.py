@@ -10,6 +10,6 @@ def create_pipeline(**kwargs) -> Pipeline:
                     node(
                         func=predict,
                         inputs=['X_test','model'],
-                        outputs='prediction',
+                        outputs='y_predict',
                         name="predict",
                     )])

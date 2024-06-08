@@ -2,7 +2,6 @@ from sklearn.ensemble import IsolationForest
 import numpy as np
 
 def train(X_train,y_train):
-
     clf = IsolationForest(
         random_state=42,
         bootstrap=True,
