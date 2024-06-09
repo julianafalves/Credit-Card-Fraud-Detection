@@ -5,7 +5,8 @@ def train(X_train,y_train):
     clf = IsolationForest(
         random_state=42,
         bootstrap=True,
-        contamination="auto"
+        contamination=0.001,
+        n_estimators=500
     )
 
     clf.fit(X_train,y_train)

@@ -4,15 +4,15 @@ generated using Kedro 0.19.6
 """
 
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import load,split_data
+from .nodes import scale_dataframe,split_data
 
 def create_pipeline(**kwargs) -> Pipeline:
-    return pipeline([node(func=load,
+    return pipeline([node(func=scale_dataframe,
                           inputs='creditCard',
-                          outputs=None),
+                          outputs='df_scaled'),
                     node(
                         func=split_data,
-                        inputs=['creditCard','params:split'],
+                        inputs=['df_scaled','params:split'],
                         outputs=[ 'X_train', 'X_test', 'y_train', 'y_test'],
                         name="split_data",
                     )])
