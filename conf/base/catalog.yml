@@ -2,6 +2,6 @@ creditCard:
   type: pandas.CSVDataset
   filepath: data/01_raw/creditcard.csv
 
-  metrics: 
-    type: tracking.MetricsDataset
-    filepath: data/09_tracking/metrics.json
+metrics:
+  type: tracking.MetricsDataset
+  filepath: data/09_tracking/metrics.json

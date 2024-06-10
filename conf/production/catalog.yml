@@ -1,3 +1,7 @@
 creditCard:
   type: pandas.CSVDataset
   filepath: s3://fraud-detection/creditcard.csv
+
+metrics:
+  type: tracking.MetricsDataset
+  filepath: data/09_tracking/metrics.json
