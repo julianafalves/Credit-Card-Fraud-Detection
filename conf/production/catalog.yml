@@ -1,7 +1,14 @@
-creditCard:
+creditcard_data:
   type: pandas.CSVDataset
   filepath: s3://fraud-detection/creditcard.csv
-
+  load_args:
+    sep: ","
+  save_args:
+    index: False
+  credentials: minio_credentials
+  fs_args:
+    client_kwargs:
+      endpoint_url: http://127.0.0.1:9000
 metrics:
   type: tracking.MetricsDataset
   filepath: data/09_tracking/metrics.json
